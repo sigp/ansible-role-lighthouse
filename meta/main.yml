@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: sigp
+  role_name: lighthouse
+  description: Lighthouse Ethereum 2.0 Client
+  license: Apache 2.0
+  company: none
+  min_ansible_version: 2.7
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+        - xenial
+  galaxy_tags:
+  - ethereum
+  - blockchain
+
+dependencies: []
