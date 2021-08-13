@@ -1,0 +1,9 @@
+---
+- name: Start and enable the Validator Client service
+  become: yes
+  systemd:
+    name: "{{ lighthouse_validator_systemd_service_name }}"
+    state: started
+    enabled: yes
+    daemon-reload: yes
+

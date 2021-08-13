@@ -1,0 +1,33 @@
+[Unit]
+Description=Lighthouse: Ethereum 2.0 Validator Client
+After=syslog.target network.target
+
+[Service]
+User={{ ansible_user }}
+Type=simple
+ExecStart={{ lighthouse_bin }} \
+	-l \
+	--debug-level {{ lighthouse_debug }} \
+	--network {{ built_in_testnet_name }} \
+	vc \
+	--metrics \
+	--init-slashing-protection \
+	--metrics-address 0.0.0.0 \
+	{% if lighthouse_vc_beacon_nodes != False %}
+		--beacon-nodes http://localhost:5052,{{ lighthouse_vc_beacon_nodes }}
+	{% else %}
+		--beacon-nodes http://localhost:5052
+	{% endif %}
+KillMode=process
+KillSignal=SIGINT
+TimeoutStopSec=90
+Restart=always
+RestartSec=10s
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=lighthouse-vc
+LimitNOFILE=65536:65536
+
+[Install]
+WantedBy=multi-user.target
+

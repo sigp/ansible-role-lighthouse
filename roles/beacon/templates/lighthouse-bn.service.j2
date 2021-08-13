@@ -1,0 +1,55 @@
+[Unit]
+Description=Lighthouse: Ethereum 2.0 Beacon Node
+After=syslog.target network.target
+
+[Service]
+User={{ lighthouse_user }}
+Type=simple
+Environment="RUST_BACKTRACE={{ lighthouse_rust_backtrace }}" "RUST_LOG={{ lighthouse_rust_log }}"
+ExecStart={{ lighthouse_bin }} \
+	{% if lighthouse_environment_logging_enabled == True %}
+		-l \
+	{% endif %}
+	--debug-level {{ lighthouse_debug_level }} \
+	--network {{ lighthouse_network }} \
+	--datadir {{ lighthouse_datadir  }} \
+	bn \
+	{% if lighthouse_beacon_http_enabled == True %}
+		--http \
+		--http-address {{ lighthouse_beacon_http_address }} \
+	{% endif %}
+	{% if lighthouse_beacon_metrics_enabled == True %}
+		--metrics \
+		--metrics-address {{ lighthouse_beacon_metrics_address }} \
+	{% endif %}
+	{% if lighthouse_beacon_enr_address is not None %}
+		--enr-address {{ lighthouse_beacon_enr_address }} \
+	{% endif %}
+	{% if lighthouse_beacon_enr_address is not None %}
+		--enr-udp-port {{ 9000 }} \
+	{% endif %}
+	{% if lighthouse_beacon_eth1_enabled == True %}
+		--eth1 \
+		--eth1-endpoints {{ lighthouse_eth1_endpoints }}
+	{% endif %}
+	{% if lighthouse_beacon_disable_malloc_tuning == True %}
+		--disable-malloc-tuning \
+	{% endif %}
+	{% if lighthouse_beacon_validator_monitor_auto == True %}
+		--validator-monitor-auto \
+	{% endif %}
+	{% if lighthouse_beacon_slasher_enabled == True %}
+		--slasher \
+	{% endif %}
+KillMode=process
+KillSignal=SIGINT
+TimeoutStopSec=90
+Restart=on-failure
+RestartSec=10s
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier={{ lighthouse_beacon_syslog_identifier }}
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,9 @@
+---
+- name: Restart and enable the beacon node service
+  become: yes
+  systemd:
+    name: "{{ lighthouse_beacon_systemd_service_name }}"
+    state: restarted
+    enabled: yes
+    daemon-reload: yes
+
