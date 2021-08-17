@@ -1,0 +1,12 @@
+---
+- name: Ensure binary directory exists
+  file:
+    path: "{{ lighthouse_bin_path }}"
+    state: directory
+
+- name: Distribute pre-built lighthouse binary
+  copy:
+    src: "{{ lighthouse_binary_on_ansible_controller }}"
+    dest: "{{ lighthouse_bin }}"
+    mode: '755'
+    force: yes

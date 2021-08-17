@@ -22,15 +22,17 @@ ExecStart={{ lighthouse_bin }} \
 		--metrics \
 		--metrics-address {{ lighthouse_beacon_metrics_address }} \
 	{% endif %}
-	{% if lighthouse_beacon_enr_address is not None %}
+	{% if lighthouse_beacon_enr_address is defined %}
 		--enr-address {{ lighthouse_beacon_enr_address }} \
 	{% endif %}
-	{% if lighthouse_beacon_enr_address is not None %}
+	{% if lighthouse_beacon_enr_address is defined %}
 		--enr-udp-port {{ 9000 }} \
 	{% endif %}
 	{% if lighthouse_beacon_eth1_enabled == True %}
 		--eth1 \
-		--eth1-endpoints {{ lighthouse_eth1_endpoints }}
+	{% endif %}
+	{% if lighthouse_beacon_eth1_endpoints is defined %}
+		--eth1-endpoints {{ lighthouse_beacon_eth1_endpoints }}
 	{% endif %}
 	{% if lighthouse_beacon_disable_malloc_tuning == True %}
 		--disable-malloc-tuning \
@@ -41,6 +43,14 @@ ExecStart={{ lighthouse_bin }} \
 	{% if lighthouse_beacon_slasher_enabled == True %}
 		--slasher \
 	{% endif %}
+	{% if lighthouse_beacon_subscribe_all_subnets == True %}
+		--subscribe-all-subnets \
+	{% endif %}
+	{% if lighthouse_beacon_import_all_attestations == True %}
+		--import-all-attestations \
+	{% endif %}
+
+# There is a new line above this line. It is structural, don't remove it.
 KillMode=process
 KillSignal=SIGINT
 TimeoutStopSec=90
@@ -48,7 +58,7 @@ Restart=on-failure
 RestartSec=10s
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier={{ lighthouse_beacon_syslog_identifier }}
+SyslogIdentifier={{ lighthouse_validator_systemd_service_name }}
 
 [Install]
 WantedBy=multi-user.target

@@ -3,16 +3,16 @@ lighthouse_bin_path: "/usr/bin"
 lighthouse_bin: "{{ lighthouse_bin_path }}/lighthouse"
 lighthouse_debug_level: "info"
 lighthouse_network: "mainnet"
-lighthouse_datadir: "{{ ansible_env.HOME }}/.lighthouse/{{ lighthouse_network }}"
+lighthouse_datadir: "/home/{{ lighthouse_user }}/.lighthouse/{{ lighthouse_network }}"
 lighthouse_datadir_beacon: "{{ lighthouse_datadir }}/beacon"
 lighthouse_datadir_slasher: "{{ lighthouse_datadir }}/slasher"
 lighthouse_datadir_validator: "{{ lighthouse_datadir }}/validator"
 lighthouse_environment_logging_enabled: True
 lighthouse_rust_backtrace: 0
 lighthouse_rust_log: ""
-lighthouse_systemd_service_files_path: "/etc/systemd/system/lighthouse-bn.service"
+lighthouse_systemd_service_files_path: "/etc/systemd/system/"
 
-lighthouse_binary_on_ansible_controller: None
+# lighthouse_binary_on_ansible_controller: None
 
 lighthouse_beacon_enabled: True
 lighthouse_beacon_systemd_service_name: "lighthouse-bn"
@@ -20,12 +20,15 @@ lighthouse_beacon_http_enabled: True
 lighthouse_beacon_http_address: "127.0.0.1"
 lighthouse_beacon_metrics_enabled: True
 lighthouse_beacon_metrics_address: "127.0.0.1"
-lighthouse_beacon_enr_address: None
-lighthouse_beacon_enr_udp_port: None
+# lighthouse_beacon_enr_address: None
+# lighthouse_beacon_enr_udp_port: None
 lighthouse_beacon_eth1_enabled: True
+# lighthouse_beacon_eth1_endpoints: None
 lighthouse_beacon_disable_malloc_tuning: False
 lighthouse_beacon_validator_monitor_auto: False
 lighthouse_beacon_slasher_enabled: True
+lighthouse_beacon_subscribe_all_subnets: False
+lighthouse_beacon_import_all_attestations: False
 
 lighthouse_validator_enabled: False
 lighthouse_validator_systemd_service_name: "lighthouse-vc"

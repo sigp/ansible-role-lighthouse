@@ -1,0 +1,4 @@
+---
+- include_tasks: "bn-provision-binary.yml"
+- include_tasks: "bn-provision-systemd.yml"
+- include_tasks: "bn-start.yml"
