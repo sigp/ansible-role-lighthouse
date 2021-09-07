@@ -1,3 +1,4 @@
 # Ansible Collection - sigp.lighthouse
 
-Documentation for the collection.
+**This package is a work-in-progress!** Please do not use it until we have
+removed this notice.
