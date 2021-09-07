@@ -5,6 +5,7 @@
     state: directory
 
 - name: Distribute pre-built lighthouse binary
+  become: yes
   copy:
     src: "{{ lighthouse_binary_on_ansible_controller }}"
     dest: "{{ lighthouse_bin }}"
