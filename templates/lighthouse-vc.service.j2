@@ -6,10 +6,13 @@ After=syslog.target network.target
 User={{ ansible_user }}
 Type=simple
 ExecStart={{ lighthouse_bin }} \
-	-l \
-	--debug-level {{ lighthouse_debug }} \
+	--debug-level {{ lighthouse_debug_level }} \
+	{% if lighthouse_disable_malloc_tuning == True %}
+	--disable-malloc-tuning \
+	{% endif %}
 	--network {{ built_in_testnet_name }} \
-	vc \
+	-l \
+	validator_client \
 	--metrics \
 	--init-slashing-protection \
 	--metrics-address 0.0.0.0 \
@@ -25,7 +28,7 @@ Restart=always
 RestartSec=10s
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier=lighthouse-vc
+SyslogIdentifier={{ lighthouse_validator_systemd_service_name }}
 LimitNOFILE=65536:65536
 
 [Install]
