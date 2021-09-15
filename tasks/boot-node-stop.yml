@@ -1,0 +1,7 @@
+---
+- name: Stop and disable the Boot Node service
+  become: yes
+  systemd:
+    name: "{{ lighthouse_boot_node_systemd_service_name }}"
+    state: stopped
+    enabled: no

@@ -31,6 +31,10 @@ lighthouse_beacon_subscribe_all_subnets: False
 lighthouse_beacon_systemd_service_name: "lighthouse-bn"
 lighthouse_beacon_validator_monitor_auto: False
 
+# Boot Node Defaults
+lighthouse_boot_node_enable_enr_auto_update: False
+lighthouse_boot_node_systemd_service_name: "lighthouse-boot-node"
+
 # Validator CLient Defaults
 lighthouse_validator_enabled: False
 lighthouse_validator_systemd_service_name: "lighthouse-vc"

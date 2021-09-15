@@ -1,0 +1,38 @@
+[Unit]
+Description=Lighthouse: Ethereum 2.0 Discv5 Boot Node
+After=syslog.target network.target
+
+[Service]
+User={{ lighthouse_user }}
+Type=simple
+Environment="RUST_BACKTRACE={{ lighthouse_rust_backtrace }}" "RUST_LOG={{ lighthouse_rust_log }}"
+ExecStart={{ lighthouse_bin }} \
+	--datadir {{ lighthouse_datadir  }} \
+	--debug-level {{ lighthouse_debug_level }} \
+	{% if lighthouse_disable_malloc_tuning == True %}
+	--disable-malloc-tuning \
+	{% endif %}
+	--network {{ lighthouse_network }} \
+	boot_node {{ lighthouse_boot_node_ip_address }} \
+	{% if lighthouse_boot_node_enable_enr_auto_update == True %}
+	--enable-enr-auto-update \
+	{% endif %}
+	{% if lighthouse_boot_node_enr_port is defined %}
+	--enr-port {{ lighthouse_boot_node_enr_port }} \
+	{% endif %}
+	{% if lighthouse_boot_node_listen_address is defined %}
+	--listen-address {{ lighthouse_boot_node_listen_address }} \
+	{% endif %}
+
+# There is a new line above this line. It is structural, don't remove it.
+KillMode=process
+KillSignal=SIGINT
+TimeoutStopSec=90
+Restart=on-failure
+RestartSec=10s
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier={{ lighthouse_boot_node_systemd_service_name }}
+
+[Install]
+WantedBy=multi-user.target

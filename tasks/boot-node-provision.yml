@@ -1,0 +1,4 @@
+---
+- include_tasks: "provision-binary.yml"
+- include_tasks: "boot-node-provision-systemd.yml"
+- include_tasks: "boot-node-start.yml"

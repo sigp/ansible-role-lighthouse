@@ -1,0 +1,8 @@
+---
+- name: Start and enable the Boot Node service
+  become: yes
+  systemd:
+    name: "{{ lighthouse_boot_node_systemd_service_name }}"
+    state: started
+    enabled: yes
+    daemon-reload: yes

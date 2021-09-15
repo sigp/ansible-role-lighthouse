@@ -1,0 +1,13 @@
+---
+- name: Ensure ip address is defined
+  fail:
+    msg: "The variable lighthouse_boot_node_ip_address is not defined."
+  when: lighthouse_boot_node_ip_address is not defined
+
+- name: Deploy lighthouse-bn.service
+  become: yes
+  template:
+    src: ../templates/lighthouse-boot-node.service.j2
+    dest: "{{ lighthouse_systemd_service_files_path }}/{{ lighthouse_boot_node_systemd_service_name }}.service"
+    force: yes
+  notify: Restart systemd
