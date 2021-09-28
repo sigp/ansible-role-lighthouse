@@ -1,0 +1,4 @@
+---
+- include_tasks: "provision-binary.yml"
+- include_tasks: "vc-provision-systemd.yml"
+- include_tasks: "vc-start.yml"

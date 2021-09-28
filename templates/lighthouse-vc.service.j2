@@ -3,33 +3,42 @@ Description=Lighthouse: Ethereum 2.0 Validator Client
 After=syslog.target network.target
 
 [Service]
-User={{ ansible_user }}
+User={{ lighthouse_user }}
 Type=simple
+Environment="RUST_BACKTRACE={{ lighthouse_rust_backtrace }}" "RUST_LOG={{ lighthouse_rust_log }}"
 ExecStart={{ lighthouse_bin }} \
+	--datadir {{ lighthouse_datadir  }} \
 	--debug-level {{ lighthouse_debug_level }} \
 	{% if lighthouse_disable_malloc_tuning == True %}
 	--disable-malloc-tuning \
 	{% endif %}
-	--network {{ built_in_testnet_name }} \
+	{% if lighthouse_environment_logging_enabled == True %}
 	-l \
-	validator_client \
-	--metrics \
-	--init-slashing-protection \
-	--metrics-address 0.0.0.0 \
-	{% if lighthouse_vc_beacon_nodes != False %}
-		--beacon-nodes http://localhost:5052,{{ lighthouse_vc_beacon_nodes }}
-	{% else %}
-		--beacon-nodes http://localhost:5052
 	{% endif %}
+	--network {{ lighthouse_network }} \
+	validator_client \
+	{% if lighthouse_validator_beacon_nodes is defined %}
+	--beacon-nodes http://localhost:5052,{{ lighthouse_validator_beacon_nodes }} \
+	{% else %}
+	--beacon-nodes http://localhost:5052 \
+	{% endif %}
+	{% if lighthouse_validator_init_slashing_protection == True %}
+	--init-slashing-protection \
+	{% endif %}
+	{% if lighthouse_validator_metrics_enabled == True %}
+	--metrics \
+	--metrics-address {{ lighthouse_validator_metrics_address }} \
+	{% endif %}
+
+# There is a new line above this line. It is structural, don't remove it.
 KillMode=process
 KillSignal=SIGINT
 TimeoutStopSec=90
-Restart=always
+Restart=on-failure
 RestartSec=10s
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier={{ lighthouse_validator_systemd_service_name }}
-LimitNOFILE=65536:65536
 
 [Install]
 WantedBy=multi-user.target

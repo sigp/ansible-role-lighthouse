@@ -1,0 +1,8 @@
+---
+- name: Deploy lighthouse-vc.service
+  become: yes
+  template:
+    src: ../templates/lighthouse-vc.service.j2
+    dest: "{{ lighthouse_systemd_service_files_path }}/{{ lighthouse_validator_systemd_service_name }}.service"
+    force: yes
+  notify: Restart systemd
