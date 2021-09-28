@@ -27,7 +27,7 @@ ExecStart={{ lighthouse_bin }} \
 	--eth1 \
 	{% endif %}
 	{% if lighthouse_beacon_eth1_endpoints is defined %}
-	--eth1-endpoints {{ lighthouse_beacon_eth1_endpoints }}
+	--eth1-endpoints {{ lighthouse_beacon_eth1_endpoints }} \
 	{% endif %}
 	{% if lighthouse_beacon_http_enabled == True %}
 	--http \
@@ -62,4 +62,3 @@ SyslogIdentifier={{ lighthouse_beacon_systemd_service_name }}
 
 [Install]
 WantedBy=multi-user.target
-
