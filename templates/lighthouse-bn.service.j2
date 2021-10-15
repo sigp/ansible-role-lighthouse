@@ -13,10 +13,13 @@ ExecStart={{ lighthouse_bin }} \
 	--disable-malloc-tuning \
 	{% endif %}
 	{% if lighthouse_environment_logging_enabled == True %}
-		-l \
+	-l \
 	{% endif %}
 	--network {{ lighthouse_network }} \
 	beacon_node \
+	{% if lighthouse_beacon_checkpoint_sync_url is defined %}
+	--checkpoint-sync-url {{ lighthouse_beacon_checkpoint_sync_url }} \
+	{% endif %}
 	{% if lighthouse_beacon_enr_address is defined %}
 	--enr-address {{ lighthouse_beacon_enr_address }} \
 	{% endif %}
@@ -33,12 +36,27 @@ ExecStart={{ lighthouse_bin }} \
 	--http \
 	--http-address {{ lighthouse_beacon_http_address }} \
 	{% endif %}
+	{% if lighthouse_beacon_http_enable_tls == True %}
+	--http-enable-tls \
+	{% endif %}
+	{% if lighthouse_beacon_http_tls_cert is defined %}
+	--http-tls-cert {{ lighthouse_beacon_http_tls_cert }} \
+	{% endif %}
+	{% if lighthouse_beacon_http_tls_key is defined %}
+	--http-tls-key {{ lighthouse_beacon_http_tls_key }} \
+	{% endif %}
 	{% if lighthouse_beacon_import_all_attestations == True %}
 	--import-all-attestations \
 	{% endif %}
 	{% if lighthouse_beacon_metrics_enabled == True %}
 	--metrics \
 	--metrics-address {{ lighthouse_beacon_metrics_address }} \
+	{% endif %}
+	{% if lighthouse_beacon_purge_db == True %}
+	--purge-db \
+	{% endif %}
+	{% if lighthouse_beacon_reconstruct_historic_states == True %}
+	--reconstruct-historic-states \
 	{% endif %}
 	{% if lighthouse_beacon_slasher_enabled == True %}
 	--slasher \

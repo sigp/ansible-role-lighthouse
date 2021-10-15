@@ -18,9 +18,10 @@ ExecStart={{ lighthouse_bin }} \
 	--network {{ lighthouse_network }} \
 	validator_client \
 	{% if lighthouse_validator_beacon_nodes is defined %}
-	--beacon-nodes http://localhost:5052,{{ lighthouse_validator_beacon_nodes }} \
-	{% else %}
-	--beacon-nodes http://localhost:5052 \
+	--beacon-nodes {{ lighthouse_validator_beacon_nodes }} \
+	{% endif %}
+	{% if lighthouse_validator_beacon_nodes_tls_certs is defined %}
+	--beacon-nodes-tls-certs {{ lighthouse_validator_beacon_nodes_tls_certs }} \
 	{% endif %}
 	{% if lighthouse_validator_init_slashing_protection == True %}
 	--init-slashing-protection \

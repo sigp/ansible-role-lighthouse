@@ -16,17 +16,23 @@ lighthouse_systemd_service_files_path: "/etc/systemd/system/"
 lighthouse_user: "{{ ansible_user }}"
 
 # Beacon Node Defaults
+#lighthouse_beacon_checkpoint_sync_url: None
 lighthouse_beacon_enabled: True
 # lighthouse_beacon_enr_address: None
 # lighthouse_beacon_enr_udp_port: None
 lighthouse_beacon_eth1_enabled: True
 # lighthouse_beacon_eth1_endpoints: None
-lighthouse_beacon_http_enabled: True
 lighthouse_beacon_http_address: "127.0.0.1"
+lighthouse_beacon_http_enabled: True
+lighthouse_beacon_http_enable_tls: False
+# lighthouse_beacon_http_tls_cert: None
+# lighthouse_beacon_http_tls_key: None
 lighthouse_beacon_import_all_attestations: False
-lighthouse_beacon_metrics_enabled: True
 lighthouse_beacon_metrics_address: "127.0.0.1"
-lighthouse_beacon_slasher_enabled: True
+lighthouse_beacon_metrics_enabled: True
+lighthouse_beacon_purge_db: False
+lighthouse_beacon_reconstruct_historic_states: False
+lighthouse_beacon_slasher_enabled: False
 lighthouse_beacon_subscribe_all_subnets: False
 lighthouse_beacon_systemd_service_name: "lighthouse-bn"
 lighthouse_beacon_validator_monitor_auto: False
@@ -36,8 +42,9 @@ lighthouse_boot_node_enable_enr_auto_update: False
 lighthouse_boot_node_systemd_service_name: "lighthouse-boot-node"
 
 # Validator Client Defaults
-# lighthouse_validator_beacon_nodes: None
+lighthouse_validator_beacon_nodes: http://localhost:5052
 lighthouse_validator_enabled: False
+# lighthouse_validator_beacon_nodes_tls_certs: None
 lighthouse_validator_init_slashing_protection: True
 lighthouse_validator_systemd_service_name: "lighthouse-vc"
 lighthouse_validator_metrics_enabled: True
