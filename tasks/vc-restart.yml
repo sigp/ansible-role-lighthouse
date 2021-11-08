@@ -1,5 +1,5 @@
 ---
-- name: Restart and enable the Validator Client service
+- name: Restart and enable the validator client service
   become: yes
   systemd:
     name: "{{ lighthouse_validator_systemd_service_name }}"
