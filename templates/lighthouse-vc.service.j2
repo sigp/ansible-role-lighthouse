@@ -21,7 +21,7 @@ ExecStart={{ lighthouse_bin }} \
 	--beacon-nodes {{ lighthouse_validator_beacon_nodes }} \
 	{% endif %}
 	{% if lighthouse_validator_enable_doppelganger_protection is defined %}
-	--enable-doppelganger-protection
+	--enable-doppelganger-protection \
 	{% endif %}
 	{% if lighthouse_validator_beacon_nodes_tls_certs is defined %}
 	--beacon-nodes-tls-certs {{ lighthouse_validator_beacon_nodes_tls_certs }} \
@@ -43,6 +43,7 @@ RestartSec=10s
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier={{ lighthouse_validator_systemd_service_name }}
+LimitNOFILE=65536:65536
 
 [Install]
 WantedBy=multi-user.target
