@@ -30,11 +30,13 @@ lighthouse_beacon_http_enable_tls: False
 lighthouse_beacon_import_all_attestations: False
 lighthouse_beacon_metrics_address: "127.0.0.1"
 lighthouse_beacon_metrics_enabled: True
+lighthouse_beacon_network_load: 3
 lighthouse_beacon_purge_db: False
 lighthouse_beacon_reconstruct_historic_states: False
 lighthouse_beacon_slasher_enabled: False
 lighthouse_beacon_subscribe_all_subnets: False
 lighthouse_beacon_systemd_service_name: "lighthouse-bn"
+lighthouse_beacon_target_peers: 50
 lighthouse_beacon_validator_monitor_auto: False
 
 # Boot Node Defaults
