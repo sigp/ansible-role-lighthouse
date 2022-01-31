@@ -52,6 +52,7 @@ ExecStart={{ lighthouse_bin }} \
 	--metrics \
 	--metrics-address {{ lighthouse_beacon_metrics_address }} \
 	{% endif %}
+	--network-load {{ lighthouse_beacon_network_load }} \
 	{% if lighthouse_beacon_purge_db == True %}
 	--purge-db \
 	{% endif %}
@@ -64,6 +65,7 @@ ExecStart={{ lighthouse_bin }} \
 	{% if lighthouse_beacon_subscribe_all_subnets == True %}
 	--subscribe-all-subnets \
 	{% endif %}
+	--target-peers {{ lighthouse_beacon_target_peers }} \
 	{% if lighthouse_beacon_validator_monitor_auto == True %}
 		--validator-monitor-auto \
 	{% endif %}
