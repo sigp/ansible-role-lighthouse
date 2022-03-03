@@ -32,6 +32,15 @@ ExecStart={{ lighthouse_bin }} \
 	{% if lighthouse_beacon_eth1_endpoints is defined %}
 	--eth1-endpoints {{ lighthouse_beacon_eth1_endpoints }} \
 	{% endif %}
+	{% if lighthouse_beacon_merge_enabled == True %}
+	--merge \
+	{% endif %}
+	{% if lighthouse_beacon_execution_endpoints is defined %}
+	--eth1-endpoints {{ lighthouse_beacon_execution_endpoints }} \
+	{% endif %}
+	{% if lighthouse_beacon_jwt_secrets is defined %}
+	--jwt-secrets {{ lighthouse_beacon_jwt_secrets }} \
+	{% endif %}
 	{% if lighthouse_beacon_http_enabled == True %}
 	--http \
 	--http-address {{ lighthouse_beacon_http_address }} \

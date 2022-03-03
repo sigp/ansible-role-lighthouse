@@ -20,6 +20,9 @@ ExecStart={{ lighthouse_bin }} \
 	{% if lighthouse_validator_beacon_nodes is defined %}
 	--beacon-nodes {{ lighthouse_validator_beacon_nodes }} \
 	{% endif %}
+	{% if lighthouse_validator_suggested_fee_recipient is defined %}
+	--suggested-fee-recipient {{ lighthouse_validator_suggested_fee_recipient }} \
+	{% endif %}
 	{% if lighthouse_validator_enable_doppelganger_protection == True %}
 	--enable-doppelganger-protection \
 	{% endif %}
