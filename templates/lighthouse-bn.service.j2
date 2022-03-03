@@ -35,6 +35,9 @@ ExecStart={{ lighthouse_bin }} \
 	{% if lighthouse_beacon_merge_enabled == True %}
 	--merge \
 	{% endif %}
+	{% if lighthouse_beacon_dummy_eth1 is defined %}
+	--dummy-eth \
+	{% endif %}
 	{% if lighthouse_beacon_execution_endpoints is defined %}
 	--execution-endpoints {{ lighthouse_beacon_execution_endpoints }} \
 	{% endif %}
