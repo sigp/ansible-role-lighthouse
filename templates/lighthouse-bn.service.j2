@@ -26,13 +26,13 @@ ExecStart={{ lighthouse_bin }} \
 	{% if lighthouse_beacon_enr_address is defined %}
 	--enr-udp-port {{ 9000 }} \
 	{% endif %}
-	{% if lighthouse_beacon_eth1_enabled == True %}
+	{% if lighthouse_beacon_eth1_enabled is defined and lighthouse_beacon_eth1_enabled is sameas true %}
 	--eth1 \
 	{% endif %}
 	{% if lighthouse_beacon_eth1_endpoints is defined %}
 	--eth1-endpoints {{ lighthouse_beacon_eth1_endpoints }} \
 	{% endif %}
-	{% if lighthouse_beacon_merge_enabled == True %}
+	{% if lighthouse_beacon_merge_enabled is defined and lighthouse_beacon_merge_enabled is sameas true %}
 	--merge \
 	{% endif %}
 	{% if lighthouse_beacon_dummy_eth1 is defined %}
