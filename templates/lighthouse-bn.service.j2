@@ -29,6 +29,9 @@ ExecStart={{ lighthouse_bin }} \
 	{% if lighthouse_beacon_eth1_enabled is defined and lighthouse_beacon_eth1_enabled is sameas true %}
 	--eth1 \
 	{% endif %}
+	{% if lighthouse_beacon_eth1_purge_cache is defined and lighthouse_beacon_eth1_purge_cache is sameas true %}
+	--eth1-purge-cache \
+	{% endif %}
 	{% if lighthouse_beacon_eth1_endpoints is defined %}
 	--eth1-endpoints {{ lighthouse_beacon_eth1_endpoints }} \
 	{% endif %}
