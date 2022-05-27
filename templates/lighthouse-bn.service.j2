@@ -16,6 +16,15 @@ ExecStart={{ lighthouse_bin }} \
 	-l \
 	{% endif %}
 	--network {{ lighthouse_network }} \
+	{% if lighthouse_terminal_block_hash_epoch_override is defined %}
+		--terminal-block-hash-epoch-override {{ lighthouse_terminal_block_hash_epoch_override }} \
+	{% endif %}
+	{% if lighthouse_terminal_block_hash_override is defined %}
+		--terminal-block-hash-override {{ lighthouse_terminal_block_hash_override }} \
+	{% endif %}
+	{% if lighthouse_terminal_total_difficulty_override is defined %}
+		--terminal-total-difficulty-override {{ lighthouse_terminal_total_difficulty_override }} \
+	{% endif %}
 	beacon_node \
 	{% if lighthouse_beacon_checkpoint_sync_url is defined %}
 	--checkpoint-sync-url {{ lighthouse_beacon_checkpoint_sync_url }} \
