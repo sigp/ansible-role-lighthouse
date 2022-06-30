@@ -95,6 +95,9 @@ ExecStart={{ lighthouse_bin }} \
 	{% if lighthouse_beacon_validator_monitor_auto == True %}
 		--validator-monitor-auto \
 	{% endif %}
+	{% if lighthouse_beacon_builder is defined %}
+	--builder {{ lighthouse_beacon_builder }} \
+	{% endif %}
 
 # There is a new line above this line. It is structural, don't remove it.
 KillMode=process

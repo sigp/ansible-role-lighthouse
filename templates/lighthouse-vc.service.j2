@@ -45,6 +45,9 @@ ExecStart={{ lighthouse_bin }} \
 	--metrics \
 	--metrics-address {{ lighthouse_validator_metrics_address }} \
 	{% endif %}
+	{% if lighthouse_validator_builder_api == True %}
+    --builder-api \
+    {% endif %}
 
 # There is a new line above this line. It is structural, don't remove it.
 KillMode=process
