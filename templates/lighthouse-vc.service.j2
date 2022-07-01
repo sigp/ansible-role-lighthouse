@@ -45,7 +45,7 @@ ExecStart={{ lighthouse_bin }} \
 	--metrics \
 	--metrics-address {{ lighthouse_validator_metrics_address }} \
 	{% endif %}
-	{% if lighthouse_validator_builder_api == True %}
+	{% if lighthouse_validator_builder_proposals == True %}
     --builder-proposals \
     {% endif %}
 
