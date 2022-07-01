@@ -46,7 +46,7 @@ ExecStart={{ lighthouse_bin }} \
 	--metrics-address {{ lighthouse_validator_metrics_address }} \
 	{% endif %}
 	{% if lighthouse_validator_builder_api == True %}
-    --builder-api \
+    --builder-proposals \
     {% endif %}
 
 # There is a new line above this line. It is structural, don't remove it.
