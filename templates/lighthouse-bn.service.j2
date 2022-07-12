@@ -98,6 +98,9 @@ ExecStart={{ lighthouse_bin }} \
 	{% if lighthouse_beacon_builder is defined %}
 	--builder {{ lighthouse_beacon_builder }} \
 	{% endif %}
+	{% if lighthouse_beacon_count_unrealized == True %}
+    --count-unrealized \
+    {% endif %}
 
 # There is a new line above this line. It is structural, don't remove it.
 KillMode=process
